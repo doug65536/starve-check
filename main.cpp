@@ -83,17 +83,17 @@ int main(int argc, char** argv)
     bool force = false;
     int timeLimit = -1;
 
-    for (int i = 1; i < argc; )
+    for (int i = 1; i < argc; ++i)
     {
         if (!strcmp(argv[i], "-t"))
         {
-            if (argc + 1 >= argc)
+            if (i + 1 >= argc)
                 error("Missing argument to thread count option (-t)");
             threads = atoi(argv[++i]);
         }
         else if (!strcmp(argv[i], "-i"))
         {
-            if (argc + 1 >= argc)
+            if (i + 1 >= argc)
                 error("Missing argument to iteration count option (-i)");
             timeLimit = atoi(argv[++i]);
         }
@@ -120,13 +120,13 @@ int main(int argc, char** argv)
         if (force)
         {
             std::cerr << "Warning, forced to use more threads"
-                         "than CPUs, " << threads << " threads,"
+                         " than CPUs, " << threads << " threads,"
                          " but only " << cpuCount <<
                          " CPUs detected!" << std::endl;
         }
         else
         {
-            std::cerr << "Capping to " << max_threads <<
+            std::cerr << "Capping to " << cpuCount <<
                     ". Use -f to override." << std::endl;
             threads = cpuCount;
         }
