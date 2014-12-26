@@ -1,14 +1,15 @@
 
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
-#include <cstring>
-#include <thread>
 #include <atomic>
-#include <chrono>
+#include <thread>
+#include <iostream>
+#include <algorithm>
+#include <iomanip>
+#include <cstring>
 #include <mutex>
 #include <condition_variable>
-#include <unordered_map>
+#include <chrono>
+
+#include "stress_instance.h"
 
 static constexpr std::size_t max_threads = 256;
 
@@ -22,31 +23,14 @@ static void error(char const* message, int exitcode = 2)
     exit(exitcode);
 }
 
-class stress_instance
-{
-public:
-    stress_instance();
-    ~stress_instance();
-    void run();
-    std::int64_t getCount();
-    void stop();
-
-private:
-    typedef std::atomic_int_least64_t CounterType;
-    void worker();
-
-    std::atomic_bool stopRequested;
-    std::thread thread;
-    char padding1[64];
-    CounterType counter;
-    char padding2[64];
-};
-
 static int run_stress(int cpucount, int timeLimit)
 {
-    static stress_instance instances[max_threads];
-    stress_instance* end = instances + cpucount;
-    std::for_each(instances, end,
+    // Sidestep all the issues with copying
+    // and ensure flat memory layout
+    std::unique_ptr<stress_instance[]> instances(new stress_instance[cpucount]);
+    stress_instance* begin = &instances[0];
+    stress_instance* end = &instances[cpucount];
+    std::for_each(begin, end,
     [](stress_instance& instance)
     {
         instance.run();
@@ -62,7 +46,7 @@ static int run_stress(int cpucount, int timeLimit)
     {
         dummyConditionVariable.wait_until(lock, Clock::now() + Duration(1));
 
-        std::for_each(instances, end,
+        std::for_each(begin, end,
         [](stress_instance& instance)
         {
             std::cout << std::setw(5) <<
@@ -76,6 +60,7 @@ static int run_stress(int cpucount, int timeLimit)
     }
     while (timeLimit != 0);
 }
+
 
 int main(int argc, char** argv)
 {
@@ -140,38 +125,4 @@ int main(int argc, char** argv)
     }
 
     return run_stress(threads, timeLimit);
-}
-
-stress_instance::stress_instance()
-    : stopRequested(false)
-    , counter(0)
-{
-}
-
-stress_instance::~stress_instance()
-{
-    stop();
-}
-
-void stress_instance::run()
-{
-    thread = std::thread(&stress_instance::worker, this);
-}
-
-std::int64_t stress_instance::getCount()
-{
-    return counter.exchange(0);
-}
-
-void stress_instance::stop()
-{
-    stopRequested = true;
-    if (thread.joinable())
-        thread.join();
-}
-
-void stress_instance::worker()
-{
-    while (!stopRequested)
-        ++counter;
 }
