@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 #include <cstring>
 #include <thread>
@@ -64,7 +65,9 @@ static int run_stress(int cpucount, int timeLimit)
         std::for_each(instances, end,
         [](stress_instance& instance)
         {
-            std::cout << (instance.getCount() / 1000000) << "M ";
+            std::cout << std::setw(5) <<
+                         (instance.getCount() / 1000000) <<
+                         "M ";
         });
         std::cout << std::endl;
 
@@ -76,7 +79,7 @@ static int run_stress(int cpucount, int timeLimit)
 
 int main(int argc, char** argv)
 {
-    int threads = 1;
+    int threads = 0;
     bool force = false;
     int timeLimit = -1;
 
@@ -107,13 +110,34 @@ int main(int argc, char** argv)
     std::size_t cpuCount = std::thread::hardware_concurrency();
 
     if (threads <= 0)
+    {
+        std::cerr << "Using all " << cpuCount << " CPUs" << std::endl;
         threads = cpuCount;
+    }
 
-    if (!force && threads > cpuCount)
-        threads = cpuCount;
+    if (threads > cpuCount)
+    {
+        if (force)
+        {
+            std::cerr << "Warning, forced to use more threads"
+                         "than CPUs, " << threads << " threads,"
+                         " but only " << cpuCount <<
+                         " CPUs detected!" << std::endl;
+        }
+        else
+        {
+            std::cerr << "Capping to " << max_threads <<
+                    ". Use -f to override." << std::endl;
+            threads = cpuCount;
+        }
+    }
 
     if (threads > max_threads)
+    {
+        std::cerr << "Capping to " << max_threads <<
+                ". Use -f to override." << std::endl;
         threads = max_threads;
+    }
 
     return run_stress(threads, timeLimit);
 }
