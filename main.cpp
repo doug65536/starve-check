@@ -11,6 +11,7 @@
 
 #include "stress_instance.h"
 
+// This is only to limit the number of threads to a sane number
 static constexpr std::size_t max_threads = 256;
 
 typedef std::chrono::system_clock Clock;
@@ -86,6 +87,13 @@ int main(int argc, char** argv)
         {
             force = true;
         }
+        else if (!strcmp(argv[i], "--help"))
+        {
+            std::cerr << argv[0] << " [-t threads] [-f]" << std::endl <<
+                "threads is the number of CPUs to use. Default=0. 0=All" << std::endl <<
+                "Use -f to force it to use more than the number of CPUs" << std::endl;
+            exit(1);
+        }
         else
         {
             error((std::string("Invalid switch: ") + argv[i]).c_str());
@@ -120,7 +128,7 @@ int main(int argc, char** argv)
     if (threads > max_threads)
     {
         std::cerr << "Capping to " << max_threads <<
-                ". Use -f to override." << std::endl;
+                ". Recompile with higher max_threads." << std::endl;
         threads = max_threads;
     }
 
