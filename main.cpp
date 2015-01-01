@@ -15,8 +15,8 @@
 static constexpr std::size_t max_threads = 256;
 
 typedef std::chrono::system_clock Clock;
-typedef std::chrono::time_point<Clock> TimePoint;
 typedef std::chrono::duration<double> Duration;
+typedef std::chrono::time_point<Clock,Duration> TimePoint;
 
 static void error(char const* message, int exitcode = 2)
 {
@@ -24,7 +24,7 @@ static void error(char const* message, int exitcode = 2)
     exit(exitcode);
 }
 
-static int run_stress(int cpucount, int timeLimit)
+static int run_stress(int cpucount, int timeLimit, double interval)
 {
     // Sidestep all the issues with copying
     // and ensure flat memory layout
@@ -43,9 +43,14 @@ static int run_stress(int cpucount, int timeLimit)
     std::mutex dummyMutex;
     std::condition_variable dummyConditionVariable;
     std::unique_lock<std::mutex> lock(dummyMutex);
+    TimePoint expiry = Clock::now();
     do
     {
-        dummyConditionVariable.wait_until(lock, Clock::now() + Duration(1));
+        if (interval > 0)
+        {
+            expiry += Duration(interval);
+            dummyConditionVariable.wait_until(lock, expiry);
+        }
 
         std::for_each(begin, end,
         [](stress_instance& instance)
@@ -68,6 +73,7 @@ int main(int argc, char** argv)
     int threads = 0;
     bool force = false;
     int timeLimit = -1;
+    double interval = 1.0;
 
     for (int i = 1; i < argc; ++i)
     {
@@ -83,14 +89,25 @@ int main(int argc, char** argv)
                 error("Missing argument to iteration count option (-i)");
             timeLimit = atoi(argv[++i]);
         }
+        else if (!strcmp(argv[i], "-d"))
+        {
+            if (i + 1 >= argc)
+                error("Missing argument to delay option (-d)");
+            interval = (std::max)(0.0, atof(argv[++i]));
+        }
         else if (!strcmp(argv[i], "-f"))
         {
             force = true;
         }
         else if (!strcmp(argv[i], "--help"))
         {
-            std::cerr << argv[0] << " [-t threads] [-f]" << std::endl <<
+            std::cerr << argv[0] << " [-t threads] [-d delay] [-f]" << std::endl <<
+                std::endl <<
                 "threads is the number of CPUs to use. Default=0. 0=All" << std::endl <<
+                std::endl <<
+                "delay is the number of seconds between updates. " << std::endl <<
+                "Decimal fractions like 0.5 are allowed. Default=1." << std::endl <<
+                std::endl <<
                 "Use -f to force it to use more than the number of CPUs" << std::endl;
             exit(1);
         }
@@ -132,5 +149,5 @@ int main(int argc, char** argv)
         threads = max_threads;
     }
 
-    return run_stress(threads, timeLimit);
+    return run_stress(threads, timeLimit, interval);
 }
