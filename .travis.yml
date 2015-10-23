@@ -35,3 +35,4 @@ addons:
     - mingw-w64-dev
     - mingw-w64-tools
     - binutils-mingw-w64
+
