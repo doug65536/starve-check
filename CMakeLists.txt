@@ -2,16 +2,20 @@ cmake_minimum_required(VERSION 2.8)
 
 set(static_link TRUE CACHED "Use static link")
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
+        CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+	set(gxx_compatible 1)
+endif()
+
 if(static_link)
-    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
-            CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    if(gxx_compatible)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
     else()
 	message(WARNING "Don't know how to do static link on this compiler")
     endif()
 endif()
 
-if(CMAKE_COMPILER_IS_GNUCXX)
+if(gxx_compatible)
 message(STATUS "Enabling C++11 and multithreading on G++")
 # Enable C++11 and multithreading in g++
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
