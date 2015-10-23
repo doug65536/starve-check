@@ -15,7 +15,7 @@ if(static_link)
     if(clang_compatible)
 	# Position independent executable to avoid error
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -pie")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIE")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
     elseif(gxx_compatible)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
     else()
