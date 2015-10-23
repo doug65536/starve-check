@@ -23,7 +23,7 @@
     "./scripts/setcompiler"
   ],
   "script": [
-    "./build/starve-check --help"
+    "./build-$CUSTOM_COMPILER/starve-check --help"
   ],
   "sudo": false,
   "env": [
