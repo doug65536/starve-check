@@ -1,0 +1,5 @@
+install: mkdir build && cd build && cmake .. && make && ./starve-check --help
+compiler:
+  - clang
+  - gcc
+
