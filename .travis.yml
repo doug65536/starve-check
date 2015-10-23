@@ -9,7 +9,7 @@ compiler:
   - mingw-64
 
 install:
-- ./scripts/setcompiler
+- . ./scripts/setcompiler
 - echo "$CXX"
 - echo "$CC"
 - cmake --version
