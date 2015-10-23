@@ -109,7 +109,7 @@ int main(int argc, char** argv)
                 "Decimal fractions like 0.5 are allowed. Default=1." << std::endl <<
                 std::endl <<
                 "Use -f to force it to use more than the number of CPUs" << std::endl;
-            exit(1);
+            exit(0);
         }
         else
         {
