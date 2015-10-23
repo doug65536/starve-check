@@ -16,7 +16,7 @@ if(static_link)
 	# Position independent executable to avoid error
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -pie")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIE")
-    if(gxx_compatible)
+    elseif(gxx_compatible)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
     else()
 	message(WARNING "Don't know how to do static link on this compiler")
