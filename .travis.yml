@@ -1,4 +1,4 @@
-install: cmake -v && gcc -v && mkdir build && cd build && cmake .. && make && ./starve-check --help
+install: cmake --version && gcc --version && mkdir build && cd build && cmake .. && make && ./starve-check --help
 compiler:
   - clang
   - gcc
