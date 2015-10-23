@@ -28,10 +28,10 @@ then
 elif [ "$CUSTOM_COMPILER" = "mingw-32" ]
 then
     echo Setting Windows x86
-    export RANLIB="i686-mingw32-ranlib"
-    export AR="i686-mingw32-ar"
-    export CXX="i686-mingw32-g++"
-    export CC="i686-mingw32-gcc"
+    export RANLIB="i686-w64-mingw32-ranlib"
+    export AR="i686-w64-mingw32-ar"
+    export CXX="i686-w64-mingw32-g++"
+    export CC="i686-w64-mingw32-gcc"
 else
     echo "Not a recognized compiler name: $CXX"
 fi
