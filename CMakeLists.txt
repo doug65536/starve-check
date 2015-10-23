@@ -45,6 +45,12 @@ add_executable(starve-check main.cpp
     .travis.yml
     scripts/setcompiler
     README.md
+    toolchains/clang-32.cmake
+    toolchains/clang-64.cmake
+    toolchains/gcc-32.cmake
+    toolchains/gcc-64.cmake
+    toolchains/mingw32-32.cmake
+    toolchains/mingw32-64.cmake
 )
 
 # Install target
