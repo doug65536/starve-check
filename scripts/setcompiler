@@ -4,5 +4,5 @@ set -ev
 cmake --version
 mkdir build
 cd build
-cmake -D"CMAKE_TOOLCHAIN_FILE=toolchain/${CUSTOM_COMPILER}.cmake" ..
+cmake -D"CMAKE_TOOLCHAIN_FILE=../toolchain/${CUSTOM_COMPILER}.cmake" ..
 make VERBOSE=1
