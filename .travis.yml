@@ -1,5 +1,27 @@
-install: cmake --version && gcc --version && mkdir build && cd build && cmake .. && make && ./starve-check --help
+sudo: false
+
+language: cpp
+
 compiler:
+  - gcc
   - clang
-  - gcc-4.8
+
+install:
+- if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+- cmake --version
+- gcc --version
+- mkdir build
+- cd build
+- cmake ..
+- make
+- ./starve-check --help
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+    - clang
 
