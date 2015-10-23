@@ -9,7 +9,7 @@ compiler:
 install:
 - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 - cmake --version
-- gcc --version
+- $CXX --version
 - mkdir build
 - cd build
 - cmake ..
