@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 2.8)
 set(static_link TRUE CACHED "Use static link")
 
 if(static_link)
-    if(CMAKE_COMPILER_IS_GNUCXX)
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
+            CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
     else()
 	message(WARNING "Don't know how to do static link on this compiler")
