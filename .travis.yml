@@ -1,6 +1,4 @@
 {
-  "sudo": false,
-  "language": "cpp",
   "addons": {
     "apt": {
       "sources": [
@@ -20,12 +18,14 @@
       ]
     }
   },
+  "language": "cpp",
   "install": [
     "./scripts/setcompiler"
   ],
   "script": [
     "./build/starve-check --help"
   ],
+  "sudo": false,
   "env": [
     "CUSTOM_COMPILER=gcc-64",
     "CUSTOM_COMPILER=gcc-32",
