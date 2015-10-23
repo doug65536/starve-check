@@ -4,7 +4,7 @@ set -ev
 cmake --version
 mkdir build-$CUSTOM_COMPILER
 cd build-$CUSTOM_COMPILER
-cmake -D"CMAKE_TOOLCHAIN_FILE=../toolchain/${CUSTOM_COMPILER}.cmake" ..
+cmake -D"CMAKE_TOOLCHAIN_FILE=../toolchains/${CUSTOM_COMPILER}.cmake" ..
 make VERBOSE=1
 
 # "CUSTOM_COMPILER=gcc-64",
