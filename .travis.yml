@@ -14,7 +14,8 @@ install:
 - cd build
 - cmake ..
 - make
-- ./starve-check --help
+
+script: ./starve-check --help
 
 addons:
   apt:
