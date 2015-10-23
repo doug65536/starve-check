@@ -9,16 +9,16 @@ compiler:
   - mingw-64
 
 install:
-- cat ./scripts/setcompiler
-- . ./scripts/setcompiler
-- echo "$CXX"
-- echo "$CC"
-- cmake --version
-- "$CXX" --version
-- mkdir build
-- cd build
-- cmake ..
-- make VERBOSE=1
+  - cat ./scripts/setcompiler
+  - . ./scripts/setcompiler
+  - echo "$CXX"
+  - echo "$CC"
+  - cmake --version
+  - "$CXX" --version
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make VERBOSE=1
 
 script: ./starve-check --help
 
