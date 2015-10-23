@@ -13,7 +13,7 @@ install:
 - mkdir build
 - cd build
 - cmake ..
-- make
+- make VERBOSE=1
 
 script: ./starve-check --help
 
