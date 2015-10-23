@@ -5,9 +5,23 @@ language: cpp
 compiler:
   - gcc
   - clang
+  - mingw-32
+  - mingw-64
 
 install:
-- if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+- if [ "$CXX" = "g++" ]; \
+  then \
+    export CXX="g++-4.8"; \
+    export CC="gcc-4.8";\
+  elif [ "$CXX" = "mingw-32"; \
+  then \
+    export CXX="i686-mingw32-g++"; \
+    export CC="i686-mingw32-gcc"; \
+  elif [ "$CXX" = "mingw-64"; \
+  then \
+    export CXX="x86_64-mingw32-g++"; \
+    export CC="x86_64-mingw32-gcc"; \
+  fi
 - cmake --version
 - $CXX --version
 - mkdir build
@@ -25,4 +39,7 @@ addons:
     - gcc-4.8
     - g++-4.8
     - clang
-
+    - mingw-w64
+    - mingw-w64-dev
+    - mingw-w64-tools
+    - binutils-mingw-w64
