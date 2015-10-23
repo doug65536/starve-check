@@ -31,7 +31,7 @@
     "CUSTOM_COMPILER=gcc-32",
     "CUSTOM_COMPILER=clang-64",
     "CUSTOM_COMPILER=clang-32",
-    "CUSTOM_COMPILER=mingw-64",
-    "CUSTOM_COMPILER=mingw-32"
+    "CUSTOM_COMPILER=mingw32-64",
+    "CUSTOM_COMPILER=mingw32-32"
   ]
 }
