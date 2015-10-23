@@ -21,7 +21,7 @@
     }
   },
   "install": [
-    "./scripts/setcompiler",
+    "./scripts/setcompiler"
   ],
   "script": [
     "build/starve-check --help"
