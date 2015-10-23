@@ -1,20 +1,43 @@
 #!/bin/bash
 set -ev
-if [ "$CXX" = "g++" ]
+"CUSTOM_COMPILER=gcc-64",
+"CUSTOM_COMPILER=gcc-32",
+"CUSTOM_COMPILER=clang-64",
+"CUSTOM_COMPILER=clang-32",
+"CUSTOM_COMPILER=mingw-64",
+"CUSTOM_COMPILER=mingw-32"
+
+if [ "$CUSTOM_COMPILER" = "gcc-64" ]
 then
-    echo Setting g++ 4.8
-    export CXX="g++-4.8"
-    export CC="gcc-4.8"
-elif [ "$CXX" = "mingw-32" ]
+    echo Setting g++ 4.8 64 bit
+    export RANLIB="gcc-ranlib"
+    export AR="gcc-ar"
+    export CXX="g++-4.9"
+    export CC="gcc-4.9"
+elif [ "$CUSTOM_COMPILER" = "gcc-32" ]
 then
-    echo Setting Windows x86
-    export CXX="i686-mingw32-g++"
-    export CC="i686-mingw32-gcc"
-elif [ "$CXX" = "mingw-64" ]
+    echo Setting g++ 4.8 32 bit
+    export RANLIB="gcc-ranlib"
+    export AR="gcc-ar"
+    export CXX="g++-4.9"
+    export CC="gcc-4.9"
+    export CXXFLAGS="-m32"
+    export CFLAGS="-m32"
+    export LDFLAGS="-m32"
+elif [ "$CUSTOM_COMPILER" = "mingw-64" ]
 then
     echo Setting Windows x64
+    export RANLIB="x86_64-mingw32-ranlib"
+    export AR="x86_64-mingw32-ar"
     export CXX="x86_64-mingw32-g++"
     export CC="x86_64-mingw32-gcc"
+elif [ "$CUSTOM_COMPILER" = "mingw-32" ]
+then
+    echo Setting Windows x86
+    export RANLIB="i686-mingw32-ranlib"
+    export AR="i686-mingw32-ar"
+    export CXX="i686-mingw32-g++"
+    export CC="i686-mingw32-gcc"
 else
     echo "Not a recognized compiler name: $CXX"
 fi

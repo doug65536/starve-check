@@ -1,32 +1,37 @@
 {
+  "sudo": false,
+  "language": "cpp",
   "addons": {
     "apt": {
       "sources": [
         "ubuntu-toolchain-r-test"
       ],
       "packages": [
-        "gcc-4.8",
-        "g++-4.8",
+        "gcc-4.9",
+        "g++-4.9",
+        "gcc-4.9-multilib",
+        "g++-4.9-multilib",
         "clang",
         "mingw-w64",
         "mingw-w64-dev",
         "mingw-w64-tools",
-        "binutils-mingw-w64"
+        "binutils-mingw-w64",
+        "wine"
       ]
     }
   },
   "install": [
     "./scripts/setcompiler",
   ],
-  "language": "cpp",
   "script": [
     "./starve-check --help"
-  ],
-  "sudo": false,
-  "compiler": [
-    "gcc",
-    "clang",
-    "mingw-32",
-    "mingw-64"
+  ]
+  "env": [
+    "CUSTOM_COMPILER=gcc-64",
+    "CUSTOM_COMPILER=gcc-32",
+    "CUSTOM_COMPILER=clang-64",
+    "CUSTOM_COMPILER=clang-32",
+    "CUSTOM_COMPILER=mingw-64",
+    "CUSTOM_COMPILER=mingw-32"
   ]
 }
