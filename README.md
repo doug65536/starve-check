@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/doug65536/starve-check.svg)
+[![Build Status](https://travis-ci.org/doug65536/starve-check.svg)](https://travis-ci.org/doug65536/starve-check)
 
 # starve-check
 

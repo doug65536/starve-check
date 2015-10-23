@@ -44,6 +44,7 @@ add_executable(starve-check main.cpp
     stress_instance.h
     .travis.yml
     scripts/setcompiler
+    README.md
 )
 
 # Install target
