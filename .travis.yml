@@ -1,5 +1,5 @@
 install: cmake --version && gcc --version && mkdir build && cd build && cmake .. && make && ./starve-check --help
 compiler:
   - clang
-  - gcc
+  - gcc-4.8
 
