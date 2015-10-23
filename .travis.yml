@@ -24,8 +24,8 @@
     "./scripts/setcompiler"
   ],
   "script": [
-    "build/starve-check --help"
-  ]
+    "./build/starve-check --help"
+  ],
   "env": [
     "CUSTOM_COMPILER=gcc-64",
     "CUSTOM_COMPILER=gcc-32",
