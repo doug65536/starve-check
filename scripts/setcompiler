@@ -1,16 +1,19 @@
 #!/bin/bash
 if [ "$CXX" = "g++" ]
 then
-	export CXX="g++-4.8"
-	export CC="gcc-4.8"
+    echo Setting g++ 4.8
+    export CXX="g++-4.8"
+    export CC="gcc-4.8"
 elif [ "$CXX" = "mingw-32" ]
 then
-	export CXX="i686-mingw32-g++"
-	export CC="i686-mingw32-gcc"
+    echo Setting Windows x86
+    export CXX="i686-mingw32-g++"
+    export CC="i686-mingw32-gcc"
 elif [ "$CXX" = "mingw-64" ]
 then
-	export CXX="x86_64-mingw32-g++"
-	export CC="x86_64-mingw32-gcc"
+    echo Setting Windows x64
+    export CXX="x86_64-mingw32-g++"
+    export CC="x86_64-mingw32-gcc"
 else
-	echo "Not a recognized compiler name: $CXX"
+    echo "Not a recognized compiler name: $CXX"
 fi
