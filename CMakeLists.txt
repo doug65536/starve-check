@@ -1,5 +1,15 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(static_link TRUE CACHED "Use static link")
+
+if(static_link)
+    if(CMAKE_COMPILER_IS_GNUCXX)
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+    else()
+	message(WARNING "Don't know how to do static link on this compiler")
+    endif()
+endif()
+
 if(CMAKE_COMPILER_IS_GNUCXX)
 message(STATUS "Enabling C++11 and multithreading on G++")
 # Enable C++11 and multithreading in g++
@@ -14,16 +24,6 @@ elseif(MSVC)
 else()
 message(WARNING "Don't know how to enable C++11 and multithreading on this compiler")
 
-endif()
-
-set(static_link TRUE CACHED "Use static link")
-
-if(static_link)
-    if(CMAKE_COMPILER_IS_GNUCXX)
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
-    else()
-	message(WARNING "Don't know how to do static link on this compiler")
-    endif()
 endif()
 
 add_executable(starve-check main.cpp

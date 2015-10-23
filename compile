@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SELFDIR=$(dirname $(realpath "$0"))
+BUILDDIR=${SELFDIR}-build
+
+echo Building $SELFDIR from $BUILDDIR
+mkdir -p $BUILDDIR
+cd $BUILDDIR
+pwd
+make
