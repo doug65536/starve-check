@@ -2,12 +2,20 @@ cmake_minimum_required(VERSION 2.8)
 
 set(static_link TRUE CACHED "Use static link")
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+	set(clang_compatible 1)
+endif()
+
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
         CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 	set(gxx_compatible 1)
 endif()
 
 if(static_link)
+    if(clang_compatible)
+	# Position independent executable to avoid error
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -pie")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIE")
     if(gxx_compatible)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
     else()
