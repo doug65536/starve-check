@@ -7,7 +7,7 @@
       "packages": [
         "gcc-4.8",
         "g++-4.8",
-        "clang-4.5",
+        "clang-4.6",
 	"libc++-dev",
         "mingw-w64",
         "mingw-w64-dev",
