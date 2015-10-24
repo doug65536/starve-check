@@ -7,5 +7,5 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++ -fPIE -pthread" CACHE ST
 set(CMAKE_CXX_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pie -pthread" CACHE STRING "Toolchain CXX flags")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread" CACHE STRING "Toolchain C Flags")
 
-set(CMAKE_CXX_COMPILER clang++-3.6)
-set(CMAKE_C_COMPILER clang-3.6)
+set(CMAKE_CXX_COMPILER clang++)
+set(CMAKE_C_COMPILER clang)
