@@ -10,6 +10,7 @@ sudo apt-get install -y \
 	libtool \
 	nano \
 	clang-3.6 \
+	libc++-dev \
 	mingw-w64 \
 	binutils-mingw-w64 \
 	binutils-mingw-w64-i686 \
