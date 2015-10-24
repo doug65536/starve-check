@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(static_link TRUE CACHED "Use static link")
+set(static_link FALSE CACHED "Use static link")
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 	set(clang_compatible 1)
@@ -27,15 +27,15 @@ if(gxx_compatible)
 message(STATUS "Enabling C++11 and multithreading on G++")
 # Enable C++11 and multithreading in g++
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -std=c++11")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -std=c++11")
-set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} -std=c++11")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -std=c++11 -O2")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -std=c++11 -O2")
+set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} -std=c++11 -O2")
 
 if(NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -pthread")
-set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} -pthread")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread -O2")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -pthread -O2")
+set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} -pthread -O2")
 endif()
 
 elseif(MSVC)

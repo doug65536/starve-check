@@ -9,7 +9,7 @@ sudo apt-get install -y \
 	automake \
 	libtool \
 	nano \
-	clang-3.6 \
+	clang-3.5 \
 	libc++-dev \
 	mingw-w64 \
 	binutils-mingw-w64 \
@@ -44,4 +44,9 @@ sudo apt-get install -y \
 	gcc-4.6 \
 	g++-4.6 \
 	gcc-4.6-multilib \
-	g++-4.6-multilib
+	g++-4.6-multilib \
+ 	libc++-dev \
+	libc++-helpers \
+	libc++1 \
+	libc++abi-dev \
+	libc++abi1
