@@ -3,8 +3,8 @@ sudo apt-get install -y \
 	build-essential \
 	cmake \
 	git \
-	svn \
-	autotool \
+	subversion \
+	autotools-dev \
 	automake \
 	libtool \
 	nano \
