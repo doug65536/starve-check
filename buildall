@@ -1,0 +1,5 @@
+#!/bin/bash
+rm -r build-*
+find toolchains -name '*.cmake' -exec bash -c 'CUSTOM_COMPILER=$(basename "{}" .cmake) scripts/setcompiler' ';'
+echo '---------------- Result '
+ls build-*
