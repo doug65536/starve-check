@@ -1,31 +1,26 @@
 {
+  "addons": {
+    "apt": {
+      "sources": [
+        "ubuntu-toolchain-r-test"
+      ],
+      "packages": [
+        "gcc-4.8",
+        "g++-4.8",
+        "clang",
+        "mingw-w64",
+        "mingw-w64-dev",
+        "mingw-w64-tools",
+        "binutils-mingw-w64"
+      ]
+    }
+  },
+  "install": [
+    ". './buildall",
+  ],
   "language": "cpp",
   "script": [
-    "sudo sudo add-apt-repository -y ppa:mingw-w64/daily-builds",
-    "sudo sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test",
-    "sudo apt-get update",
-    "apt-cache search mingw",
-    "sudo apt-get install -y build-essential cmake",
-    "sudo apt-get install -y w64-toolchain",
-    "sudo apt-get install -y gcc-4.9",
-    "sudo apt-get install -y g++-4.9",
-    "sudo apt-get install -y gcc-4.9-multilib",
-    "sudo apt-get install -y g++-4.9-multilib",
-    "sudo apt-get install -y clang",
-    "sudo apt-get install -y mingw-w64",
-    "sudo apt-get install -y mingw-w64-dev",
-    "sudo apt-get install -y mingw-w64-tools",
-    "sudo apt-get install -y gcc-mingw-w64-x86-64",
-    "sudo apt-get install -y g++-mingw-w64-x86-64",
-    "sudo apt-get install -y gcc-mingw-w64-i686",
-    "sudo apt-get install -y g++-mingw-w64-i686",
-    "sudo apt-get install -y binutils-mingw-w64",
-    "sudo apt-get install -y wine",
-    "./scripts/setcompiler",
-    "./build-$CUSTOM_COMPILER/starve-check --help"
+    "find -name 'starve-check' -executable -exec '{}' --help ';'"
   ],
-  "sudo": true,
-  "env": [
-    "CUSTOM_COMPILER=mingw32-64"
-  ]
+  "sudo": false
 }
