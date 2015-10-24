@@ -16,7 +16,7 @@
     }
   },
   "install": [
-    ". './buildall",
+    ". ./buildall",
   ],
   "language": "cpp",
   "script": [
