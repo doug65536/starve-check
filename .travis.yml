@@ -21,7 +21,7 @@
   ],
   "language": "cpp",
   "script": [
-    "find -name 'starve-check' -executable -exec '{}' --help ';'"
+    "find -name 'build-*/starve-check*' -exec '{}' ';'"
   ],
   "sudo": false
 }
