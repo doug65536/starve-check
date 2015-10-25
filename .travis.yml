@@ -18,7 +18,8 @@
     }
   },
   "install": [
-    ". ./buildall",
+    "./detect_toolchains",
+    "./buildall",
   ],
   "language": "cpp",
   "script": [
