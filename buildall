@@ -14,6 +14,6 @@ elif [ -f "./toolchains/$1.cmake" ]; then
 else
 	echo Invalid build name: $1, must be one of:
 	find toolchains -name '*.cmake' \
-		-exec basename '{}' ';'
+		-exec basename '{}' '.cmake' ';'
 fi
 

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+echo -n Detecting toolchains...
+CLANG=$(find /usr -executable -type f -name 'clang++-*')
+MINGW32=$(find /usr -executable -type f -name 'i686-w64-mingw32-g++-*')
+MINGW64=$(find /usr -executable -type f -name 'x86_64-w64-mingw32-g++-*')
+GCC=$(find /usr -executable -type f -name 'g++-*')
+echo done
+
+for cxxcomp in $(echo $CLANG | tr " " "\n")
+do
+    basecxx=$(basename $cxxcomp)
+    echo cxxcomp_cl= $cxxcomp
+    ccomp=${cxxcomp/\+\+/}
+    csys=Linux
+    sed 's|_cxxcompiler_|'$cxxcomp'|' toolchain-template.cmake \
+        | sed 's|_ccompiler_|'$ccomp'|' \
+        | sed 's|_system_|'$csys'|' \
+        > toolchains/auto-${basecxx}.cmake
+done
+for cxxcomp in $(echo $MINGW32 | tr " " "\n"); do
+    basecxx=$(basename $cxxcomp)
+    echo cxxcomp_w3= $cxxcomp
+    ccomp=${cxxcomp/\+\+/cc}
+    csys=Linux
+    sed 's|_cxxcompiler_|'${cxxcomp}'|' toolchain-template.cmake \
+        | sed 's|_ccompiler_|'$ccomp'|' \
+        | sed 's|_system_|'$csys'|' \
+        > toolchains/auto-${basecxx}.cmake
+done
+for cxxcomp in $(echo $MINGW64 | tr " " "\n"); do
+    basecxx=$(basename $cxxcomp)
+    echo cxxcomp_w6= $cxxcomp
+    ccomp=${cxxcomp/\+\+/cc}
+    csys=Windows
+    sed 's|_cxxcompiler_|'${cxxcomp}'|' toolchain-template.cmake \
+        | sed 's|_ccompiler_|'$ccomp'|' \
+        | sed 's|_system_|'$csys'|' \
+        > toolchains/auto-${basecxx}.cmake
+done
+for cxxcomp in $(echo $GCC | tr " " "\n"); do
+    basecxx=$(basename $cxxcomp)
+    echo cxxcomp_gc= $cxxcomp
+    ccomp=${cxxcomp/\+\+/cc}
+    csys=Linux
+    sed 's|_cxxcompiler_|'${cxxcomp}'|' toolchain-template.cmake \
+        | sed 's|_ccompiler_|'$ccomp'|' \
+        | sed 's|_system_|'$csys'|' \
+        > toolchains/auto-${basecxx}.cmake
+done
+
+#echo $CLANG
+#echo $MINGW32
+#echo $MINGW64
+#echo $GCC
+
