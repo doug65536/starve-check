@@ -1,5 +1,19 @@
 #!/bin/bash
-rm -r build-*
-find toolchains -name '*.cmake' -exec bash -c 'CUSTOM_COMPILER=$(basename "{}" .cmake) scripts/setcompiler' ';'
-echo '---------------- Result '
-ls build-*
+if [ "$1" = "" ]; then
+	rm -r build-*
+	find toolchains -name '*.cmake' \
+		-exec bash -c \
+		'CUSTOM_COMPILER=$(basename "{}" .cmake) scripts/setcompiler' \
+		';'
+
+	echo '---------------- Result '
+	ls build-*
+elif [ -f "./toolchains/$1.cmake" ]; then
+	rm -r build-$1
+	CUSTOM_COMPILER=$1 scripts/setcompiler
+else
+	echo Invalid build name: $1, must be one of:
+	find toolchains -name '*.cmake' \
+		-exec basename '{}' ';'
+fi
+
