@@ -4,7 +4,7 @@ echo -n Detecting toolchains...
 CLANG=$(find /usr -executable -type f -name 'clang++-*')
 MINGW32=$(find /usr -executable -type f -name 'i686-w64-mingw32-g++-*')
 MINGW64=$(find /usr -executable -type f -name 'x86_64-w64-mingw32-g++-*')
-GCC=$(find /usr -executable -type f -name 'g++-*')
+GCC=$(find /usr -executable -type f -name '*-g++-*')
 echo done
 
 for cxxcomp in $(echo $CLANG | tr " " "\n")
