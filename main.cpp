@@ -101,11 +101,12 @@ int main(int argc, char** argv)
         }
         else if (!strcmp(argv[i], "--help"))
         {
-            std::cerr << argv[0] << " [-t threads] [-d delay] [-f]" << std::endl <<
+            std::cerr << argv[0] << " [-i iterations] [-t threads] [-d delay] [-f]" << std::endl <<
                 std::endl <<
                 "threads is the number of CPUs to use. Default=0. 0=All" << std::endl <<
                 std::endl <<
                 "delay is the number of seconds between updates. " << std::endl <<
+                "iterations is the number of samples to take before exiting, 0=Infinite" << std::endl <<
                 "Decimal fractions like 0.5 are allowed. Default=1." << std::endl <<
                 std::endl <<
                 "Use -f to force it to use more than the number of CPUs" << std::endl;

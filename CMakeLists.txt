@@ -11,18 +11,6 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
 	set(gxx_compatible 1)
 endif()
 
-if(static_link)
-    if(clang_compatible)
-	# Position independent executable to avoid error
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -pie")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-    elseif(gxx_compatible)
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
-    else()
-	message(WARNING "Don't know how to do static link on this compiler")
-    endif()
-endif()
-
 if(gxx_compatible)
 message(STATUS "Enabling C++11 and multithreading on G++")
 # Enable C++11 and multithreading in g++
