@@ -3,8 +3,11 @@ set(CMAKE_SYSTEM_NAME Linux)
 #set(CMAKE_AR "gcc-ar" CACHE STRING "Toolchain options")
 #set(CMAKE_RANLIB "gcc-ranlib" CACHE STRING "Toolchain options")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++ -pthread")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --stdlib=libc++ -pthread -use-ld=gold")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread -use-ld=gold")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -use-ld=gold")
+set(CMAKE_SHARED_LINKER_FLAGS_FLAGS "${CMAKE_SHARED_LINKER_FLAGS_FLAGS}  -use-ld=gold")
+set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS}  -use-ld=gold")
 
 find_program(CMAKE_CXX_COMPILER NAMES
         clang++-4.9
