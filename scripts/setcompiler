@@ -7,7 +7,7 @@ cd build-$CUSTOM_COMPILER
 echo dir:
 pwd
 cmake -D"CMAKE_TOOLCHAIN_FILE=../toolchains/${CUSTOM_COMPILER}.cmake" ..
-make VERBOSE=1
+make VERBOSE=1 && make package
 
 # "CUSTOM_COMPILER=gcc-64",
 # "CUSTOM_COMPILER=gcc-32",

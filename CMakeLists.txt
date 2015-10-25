@@ -13,7 +13,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
 	set(gxx_compatible 1)
 endif()
 
-try_compile(detect_cxx11_flag_00_result
+try_compile(
+    detect_cxx11_flag_00_result
     ${CMAKE_CURRENT_BINARY_DIR}/configuretemp
     "${CMAKE_CURRENT_SOURCE_DIR}/configuresrc/detectcxx11-thread.cpp"
     COMPILE_DEFINITIONS "-std=c++11 -pthread"
