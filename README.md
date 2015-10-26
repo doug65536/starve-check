@@ -36,3 +36,6 @@ Run some of the provided shell scripts:
 
 This will attempt to build with all available compiler
 versions and targets.
+
+All successful builds will produce a deb file package
+in the `out/` directory.
