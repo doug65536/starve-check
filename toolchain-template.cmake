@@ -9,4 +9,5 @@ set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS}  -fuse-ld=gold")
 set(CMAKE_CXX_COMPILER _cxxcompiler_)
 set(CMAKE_C_COMPILER _ccompiler_)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -std=c++11 -pthread")
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -O2 -pthread")
