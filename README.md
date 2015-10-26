@@ -19,9 +19,11 @@ I've provided a few ways to build this
 
 ### Simple method
 There's a bunch of fancy build stuff, but really,
-f you throw `*.cpp` from the root at a C++11 compiler,
+if you throw `*.cpp` from the root at a C++11 compiler,
 it will work. The code uses threads, and unfortunately,
-compilers may require you to pass flags, such as:
+compilers may require you to pass flags, such as
+`-std=c++11` and `-pthread`.
+
 
 ### Fancy method
 
