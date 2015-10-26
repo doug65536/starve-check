@@ -39,3 +39,19 @@ versions and targets.
 
 All successful builds will produce a deb file package
 in the `out/` directory.
+
+#### Simple example with gcc
+```
+g++ -o starve-check -pthread -std=c++11 *.cpp
+```
+
+#### Nicer example with cmake
+```
+mkdir build
+cd build
+cmake ..
+make && make package
+```
+
+*I normally keep the build directory outside the source
+directory, but in this case, it really does not matter.*
