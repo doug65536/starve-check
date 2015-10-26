@@ -8,6 +8,8 @@ if [ "$1" = "" ]; then
 
 	echo '---------------- Result '
 	ls build-*
+	rm ./out/*
+	for n in $(find -name '*.deb' | grep -v 'CPack'); do T="${n//\//-}"; mv "$n" "out/${T:13}"; done
 elif [ -f "./toolchains/$1.cmake" ]; then
 	rm -r build-$1
 	CUSTOM_COMPILER=$1 scripts/setcompiler

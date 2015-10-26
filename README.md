@@ -4,3 +4,33 @@
 
 Detect CPU starvation
 
+Code is 100% standard C++11, nothing system specific
+whatsoever. If you find something non-portable, that
+is a bug, please
+[file an issue](https://github.com/doug65536/starve-check/issues).
+
+## Building
+
+I've provided a few ways to build this
+
+1. Build with cmake.
+2. Simple method (described below)
+3. Build using all available cross-compilation toolchains.
+
+### Simple method
+There's a bunch of fancy build stuff, but really,
+f you throw `*.cpp` from the root at a C++11 compiler,
+it will work. The code uses threads, and unfortunately,
+compilers may require you to pass flags, such as:
+
+### Fancy method
+
+Run some of the provided shell scripts:
+
+```
+./detect_toolchains
+./buildall
+```
+
+This will attempt to build with all available compiler
+versions and targets.
