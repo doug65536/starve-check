@@ -9,6 +9,11 @@ whatsoever. If you find something non-portable, that
 is a bug, please
 [file an issue](https://github.com/doug65536/starve-check/issues).
 
+## Pre-built .deb packages
+
+I'm experimenting with automating cross compilation, try the
+[.deb packages in the Releases section](https://github.com/doug65536/starve-check/releases).
+
 ## Building
 
 I've provided a few ways to build this
