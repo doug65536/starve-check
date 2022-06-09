@@ -13,4 +13,4 @@ Higher numbers are better. Ideally, it should print the same number every row. I
 
 It is normal to see one cpu being slightly worse than all the rest on real hardware, that is probably cpu 0, and some drivers and stuff like legacy IRQ handlers are pinned there.
 
-If you are the technical type: The numbers it prints are the number of atomic increments per second it could accomplish since the last print. It has a linear relationship with how many cycles you were scheduled by the VM host and/or OS, because there is no contention on the cache lines where the counters live.
+If you are the technical type: The numbers it prints are the number of atomic increments per second it could accomplish since the last print. It has a linear relationship with how many cycles you were scheduled by the VM host and/or OS, because there is no contention on the cache lines where the counters live. It can't trick you by lying about your cpu time or anything. We measure actual work done.
